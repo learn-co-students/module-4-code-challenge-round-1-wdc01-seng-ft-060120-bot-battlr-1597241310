@@ -24,20 +24,24 @@ class BotsPage extends Component {
 
   clickBot = (selectedBot) => {
     let newArmy = this.state.botArmy
-    if(newArmy.includes(selectedBot))
-      return newArmy
+    if(this.state.botArmy.includes(selectedBot))
+      delete newArmy[newArmy.indexOf(selectedBot)]
     else
-      newArmy.push(selectedBot)
-      this.setState({
-        botArmy: newArmy
-    })
+      if(newArmy.includes(selectedBot))
+        return newArmy
+      else
+        newArmy.push(selectedBot)
+        this.setState({
+          botArmy: newArmy
+      })
   }
 
 
   render() {
     return <div>
       {<YourBotArmy
-        botArmy={this.state.botArmy} />}
+        botArmy={this.state.botArmy}
+        clickBot={this.clickBot} />}
       {<BotsCollection
         botsData={this.state.botsData} 
         clickBot={this.clickBot} />}

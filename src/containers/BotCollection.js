@@ -12,7 +12,6 @@ class BotCollection extends Component {
             <BotCard 
               bot={bot}
               clickBot={this.props.clickBot}/>)}
-          Collection of all bots
         </div>
       </div>
     );
