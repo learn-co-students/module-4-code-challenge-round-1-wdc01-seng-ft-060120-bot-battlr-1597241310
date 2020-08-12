@@ -10,7 +10,7 @@ class BotsPage extends Component {
     super()
     this.state = {
       botsData: [],
-      selectedBot: ""
+      botArmy: []
     }
   }
   
@@ -23,21 +23,24 @@ class BotsPage extends Component {
   }
 
   clickBot = (selectedBot) => {
-    this.setState({
-      selectedBot
+    let newArmy = this.state.botArmy
+    if(newArmy.includes(selectedBot))
+      return newArmy
+    else
+      newArmy.push(selectedBot)
+      this.setState({
+        botArmy: newArmy
     })
   }
 
-  addBot = () => {
-
-  }
 
   render() {
     return <div>
-      {<YourBotArmy selectedBot={this.state.selectedBot}/>}
+      {<YourBotArmy
+        botArmy={this.state.botArmy} />}
       {<BotsCollection
         botsData={this.state.botsData} 
-        clickBot={this.clickBot}/>}
+        clickBot={this.clickBot} />}
     </div>;
   }
 }
