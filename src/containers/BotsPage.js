@@ -7,14 +7,24 @@ const botsURL = 'http://localhost:6001/bots/'
 class BotsPage extends Component {
   state = {
     botList: [],
-    botArmyList: []
+    botArmyList: [],
+    // currentBotShow: null
   }
 
   deleteBot = bot => {
-
     fetch(botsURL + bot.id, { method: 'DELETE' })
       .then( resp => resp.json() )
-      .then( alert( bot.name + ' was deleted successfully') )
+      .then( data => this.removeFromLists(bot) )
+  }
+
+  removeFromLists = bot => {
+    let updatedBotList = this.state.botList.filter( b => b !== bot )
+    let updatedBotArmyList = this.state.botArmyList.filter( b => b !== bot )
+
+    this.setState({
+      botList: updatedBotList,
+      botArmyList: updatedBotArmyList
+    })
   }
 
   addToBotArmyList = bot => {
