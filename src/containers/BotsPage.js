@@ -13,11 +13,34 @@ class BotsPage extends Component {
     show: -1
   }
   
+  //returns the class if it exists, else, false
+  classInArmy = (id) =>
+  {
+    const classes = []
+    let givenClass;
+    const {army,bots} = this.state
+    
+    bots.forEach(bot => 
+      {
+        if(army.includes(bot.id))
+          classes.push(bot.bot_class)
+        if(id === bot.id)
+          givenClass = bot.bot_class
+      })
+    return classes.includes(givenClass) ? givenClass : false;
+  }
+
   enlist = (id) =>
   {
     const {army} = this.state
+    const botClass = this.classInArmy(id)
     if (!army.includes(id))
-    this.setState({army: [...army,id], show: -1})
+    {
+      if(botClass)
+        alert(`${botClass} role is already filled, pick a different class.`)
+      else
+        this.setState({army: [...army,id], show: -1})
+    }
   }
   
   deenlist = (id) =>
