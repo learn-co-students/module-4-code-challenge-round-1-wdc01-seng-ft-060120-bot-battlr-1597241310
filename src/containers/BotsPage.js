@@ -8,10 +8,20 @@ class BotsPage extends Component {
   constructor(){
     super()
     this.state ={
-      bots: []
+      bots: [],
+      displayBot: []
     }
   }
 
+  addBotToArmy = (bot) => {
+    let displayBot = [...displayBot]
+      displayBot.push(bot)
+    this.setState({
+      displayBot: displayBot
+    })
+
+  }
+ 
   componentDidMount(){
     fetch(API)
     .then(resp => resp.json())
@@ -24,8 +34,11 @@ class BotsPage extends Component {
 
   render() {
     return <div>
-      <YourBotArmy />
-      <BotCollection AllBots={this.state.bots}/>
+      <YourBotArmy BotDisplay={this.state.displayBot} />
+      <BotCollection 
+      AllBots={this.state.bots}
+      addBotToArmy={this.addBotToArmy}
+      />
       
       
       
