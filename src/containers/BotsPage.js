@@ -2,20 +2,22 @@ import React, { Component } from "react";
 
 import YourBotArmy from './YourBotArmy'
 import BotCollection from './BotCollection'
+import BotSpecs from '../components/BotSpecs'
 
 const BOTS = "http://localhost:6001/bots/" 
 
 class BotsPage extends Component {
   state = {
     bots: [],
-    army: []
+    army: [],
+    show: -1
   }
   
   enlist = (id) =>
   {
     const {army} = this.state
     if (!army.includes(id))
-    this.setState({army: [...army,id]})
+    this.setState({army: [...army,id], show: -1})
   }
   
   deenlist = (id) =>
@@ -39,6 +41,35 @@ class BotsPage extends Component {
     .then(json => this.setState({bots: json}))
   }
 
+  
+  showBot = (id) =>
+  {
+    this.setState({show: id})
+  }
+  showCollection = () =>
+  {
+    this.setState({show: -1})
+  }
+
+  collectionOrShow = () =>
+  {
+    const {show,bots} = this.state
+    if(show < 0)
+    {
+      return <BotCollection onClick={this.showBot}
+                            bots={bots} 
+                            destroy={this.destroy}
+      />
+    }else
+    {
+      const bot = bots.find(bot => bot.id === show)
+      return <BotSpecs  bot={bot} 
+                        enlist={this.enlist}
+                        goBack={this.showCollection}
+                        />
+    }
+  }
+  
   render() {
     const {bots,army} = this.state
     return <div>
@@ -47,10 +78,7 @@ class BotsPage extends Component {
                       deenlist={this.deenlist}
                       destroy={this.destroy}
         />
-        <BotCollection  enlist={this.enlist} 
-                        bots={bots} 
-                        destroy={this.destroy}
-        />
+        {this.collectionOrShow()}
       </div>;
   }
 }
