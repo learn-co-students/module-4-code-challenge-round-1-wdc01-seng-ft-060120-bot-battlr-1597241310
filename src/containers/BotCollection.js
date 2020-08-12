@@ -5,7 +5,7 @@ import BotSpecs from "../components/BotSpecs"
 
 class BotCollection extends Component {
   //your code here
-  let 
+  // let NewBot = this.props.AllBots.map(bot )
   render() {
     return (
       <div className="ui four column grid">
