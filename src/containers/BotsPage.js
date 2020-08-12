@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs"
 
 const BASEURL = "http://localhost:6001/bots/"
 
@@ -9,6 +10,8 @@ class BotsPage extends Component {
   state = {
     bots: [],
     myArmy: [],
+    specs: false,
+    currentBot: {},
   }
 
   componentDidMount(){
@@ -21,23 +24,41 @@ class BotsPage extends Component {
     })
   }
 
-  addBot = (target, bot) => {
+  showSpecs = (target, currentBot) => {
     if (target.tagName === "BUTTON"){ return }
+    this.setState({
+      specs: true,
+      currentBot
+    })
+  }
+
+  hideSpecs = () => {
+    this.setState({
+      specs: false,
+    })
+  }
+
+  addBot = (bot) => {
+    let newBots = this.state.bots.filter(mybot => mybot !== bot )
     if (this.state.myArmy.includes(bot)){
       alert("Already on your squad, boss!")
       return
     }
     let updatedArmy = [...this.state.myArmy, bot]
     this.setState({
-      myArmy: updatedArmy
+      myArmy: updatedArmy,
+      bots: newBots,
+      specs: false,
     })
   }
 
   removeBot = (target, bot) => {
     if (target.tagName === "BUTTON"){ return }
     let updatedArmy = this.state.myArmy.filter(mybot => mybot !== bot )
+    let updatedBots = [...this.state.bots, bot]
     this.setState({
-      myArmy: updatedArmy
+      myArmy: updatedArmy,
+      bots: updatedBots,
     })
   }
 
@@ -70,11 +91,19 @@ class BotsPage extends Component {
         removeBot={ this.removeBot }
         deleteBot={ this.deleteBot }
       />
-      <BotCollection 
-        bots={ this.state.bots }
-        addBot={ this.addBot }
-        deleteBot={ this.deleteBot }
-      />
+      { this.state.specs 
+        ? <BotSpecs 
+            bot={this.state.currentBot}
+            hideSpecs={this.hideSpecs}
+            addBot={this.addBot}
+          />
+        : <BotCollection 
+            bots={ this.state.bots }
+            showSpecs={ this.showSpecs }
+            deleteBot={ this.deleteBot }
+          /> 
+      }
+      
     </div>
     )
   }
