@@ -49,13 +49,19 @@ class BotsPage extends Component {
     })
   }
 
+  removeArmyBot = (releasedBot) => {
+    const bots = this.state.displayBots.filter(bot => bot.id !== releasedBot.id)
+    this.setState({
+      displayBots: bots
+    })
+  }
+
   render() {
     return <div>
       <YourBotArmy 
         bots={this.state.displayBots}
         releaseBot={this.releaseBot}
-        addBot={this.addBot}
-        removeBot={this.removeBot}
+        removeArmyBot={this.removeArmyBot}
       />
       <BotCollection 
         bots={this.state.bots}
