@@ -2,12 +2,19 @@ import React, { Component } from "react";
 
 class BotCollection extends Component {
   //your code here
+  generateBots = () => {
+    this.props.bots.map(bot =>
+      <BotCard 
+      bot={bot}
+      addBot={props.addBot}
+      />)
+  }
 
   render() {
     return (
       <div className="ui four column grid">
         <div className="row">
-          {/*...and here..*/}
+          { this.generateBots() }
           Collection of all bots
         </div>
       </div>

@@ -22,12 +22,16 @@ class BotsPage extends Component {
         bots: bots
       }))
   }
+
+  addToMyBots = (bot) => {
+    debugger
+  }
   
 
   render() {
     return (
     <div>
-      <BotCollection />
+      <BotCollection bots={this.state.bots} addBots={this.addToMyBots}/>
     </div>
     )
   }
