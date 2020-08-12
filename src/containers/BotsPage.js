@@ -21,17 +21,17 @@ class BotsPage extends Component {
   render() {
     return <div>
       <YourBotArmy 
-      addToArmy={this.addToArmy} 
+      handleArmy={this.handleArmy} 
       releaseFromService={this.releaseFromService}
       armyBots={this.state.armyBots} />
       <BotsCollection 
-      addToArmy={this.addToArmy} 
+      handleArmy={this.handleArmy} 
       releaseFromService={this.releaseFromService}
       bots={this.state.bots} /> 
       </div>;
   }
 
-  addToArmy = (e, clickedBot) => {
+  handleArmy = (e, clickedBot) => {
     if (e.target.type !== "submit") {
       if (this.state.armyBots.includes(clickedBot)) {
         const newBotArray = this.state.armyBots.filter(bot => bot.id !== clickedBot.id )
@@ -58,7 +58,6 @@ class BotsPage extends Component {
   }
 
   handleRemoval = (passedBot) => {
-    console.log(passedBot)
     const newBotArmy = this.state.armyBots.filter(bot => bot.id !== passedBot.id);
     const newBotArray = this.state.bots.filter(bot => bot.id !== passedBot.id);
     this.setState({
