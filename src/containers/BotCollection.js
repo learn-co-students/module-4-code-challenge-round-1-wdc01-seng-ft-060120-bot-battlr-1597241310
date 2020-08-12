@@ -11,7 +11,8 @@ class BotCollection extends Component {
           {this.props.botsData.map(bot => 
             <BotCard 
               bot={bot}
-              clickBot={this.props.clickBot}/>)}
+              clickBot={this.props.clickBot} 
+              deleteBot={this.props.deleteBot} />)}
         </div>
       </div>
     );

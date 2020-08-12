@@ -36,6 +36,17 @@ class BotsPage extends Component {
       })
   }
 
+  deleteBot = (deletedBot) => {
+    fetch(botsUrl + `/${deletedBot.id}`, {
+      method: 'DELETE'
+    })
+      .then(fetch(botsUrl)
+      .then(resp => resp.json())
+      .then(botsData => this.setState({
+        botsData
+      })))
+  }
+
 
   render() {
     return <div>
@@ -43,7 +54,8 @@ class BotsPage extends Component {
         botArmy={this.state.botArmy}
         clickBot={this.clickBot} />}
       {<BotsCollection
-        botsData={this.state.botsData} 
+        botsData={this.state.botsData}
+        deleteBot={this.deleteBot}
         clickBot={this.clickBot} />}
     </div>;
   }
