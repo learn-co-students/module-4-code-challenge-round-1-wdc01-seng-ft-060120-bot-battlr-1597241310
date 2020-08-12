@@ -27,14 +27,19 @@ class BotsPage extends Component {
     })
   }
 
-  addToBotArmyList = bot => {
-    let { botArmyList } = this.state
+  addToBotArmyList = ( bot, event ) => {
+    event.persist()
 
-    if ( !botArmyList.includes(bot) ){
-      this.setState({
-        botArmyList: [...botArmyList, bot]
-      })
+    if ( !event.target.matches('button') ) {
+      let { botArmyList } = this.state
+  
+      if ( !botArmyList.includes(bot) ){
+        this.setState({
+          botArmyList: [...botArmyList, bot]
+        })
+      }
     }
+
   }
 
   removeFromBotArmyList = bot => {
