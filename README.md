@@ -10,7 +10,7 @@ Here's the scenario: a galactic overlord has hired you, a galactic web developer
 
 ## Instructions
 
-For this project, you’ll be building out a React application that displays a list of available bots, among other features. Try your best to find the right places to insert code into the established code base.
+For this project, you’ll be building out a React application that displays a list of available bots, among other features. Try your best to find the right places to insert code into the established ode base.
 
 Part of what this code challenge is testing is your ability to follow given instructions. While you will definitely have a significant amount of freedom in how you implement the features, be sure to carefully read the directions for setting up the application.
 
