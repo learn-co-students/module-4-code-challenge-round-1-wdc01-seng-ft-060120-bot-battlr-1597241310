@@ -23,6 +23,14 @@ class BotsPage extends Component {
     const army = [...this.state.army].filter(_id => _id != id)
     this.setState({army})
   }
+
+  destroy = (id) =>
+  {
+    const {bots} = this.state
+    fetch(BOTS + id,{method: "DELETE"})
+    .then(r => r.json())
+    .then(this.setState({bots: [...bots].filter(bot => bot.id != id)}))
+  }
   
   componentDidMount()
   {
@@ -34,8 +42,15 @@ class BotsPage extends Component {
   render() {
     const {bots,army} = this.state
     return <div>
-        <YourBotArmy bots={bots} army={army} deenlist={this.deenlist}/>
-        <BotCollection enlist={this.enlist} bots={bots} />
+        <YourBotArmy  bots={bots} 
+                      army={army} 
+                      deenlist={this.deenlist}
+                      destroy={this.destroy}
+        />
+        <BotCollection  enlist={this.enlist} 
+                        bots={bots} 
+                        destroy={this.destroy}
+        />
       </div>;
   }
 }

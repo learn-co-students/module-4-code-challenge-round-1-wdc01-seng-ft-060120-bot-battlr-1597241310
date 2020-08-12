@@ -6,8 +6,8 @@ class BotCollection extends Component {
   
   generateBots = () =>
   {
-    const {bots,enlist} = this.props
-    return bots.map(bot => <BotCard bot={bot} onClick={enlist}/>)
+    const {bots,enlist,destroy} = this.props
+    return bots.map(bot => <BotCard bot={bot} onClick={enlist} destroy={destroy} key={bot.id}/>)
   }
 
   render() {

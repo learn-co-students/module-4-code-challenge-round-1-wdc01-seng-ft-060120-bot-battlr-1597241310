@@ -6,11 +6,12 @@ class YourBotArmy extends Component {
   
   generateArmy = () =>
   {
-    const {bots,army,deenlist} = this.props
+    const {bots,army,deenlist,destroy} = this.props
 
     let botArmy = []
     bots.forEach(bot => {
-      army.includes(bot.id) && botArmy.push(<BotCard bot={bot} onClick={deenlist}/>)
+      army.includes(bot.id) 
+      && botArmy.push(<BotCard bot={bot} onClick={deenlist} destroy={destroy} key={bot.id}/>)
     });
     return botArmy;
   }
